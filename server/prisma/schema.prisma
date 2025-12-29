@@ -12,3 +12,43 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+
+
+// الاقسام
+model Department {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique 
+  students Student[]
+  courses  Course[]
+}
+
+// الطلاب
+model Student {
+  id           Int          @id @default(autoincrement())
+  name         String
+  email        String       @unique
+  department   Department   @relation(fields: [deptId], references: [id])
+  deptId       Int
+  enrollments  Enrollment[]
+}
+
+// المواد الدراسية
+model Course {
+  id           Int          @id @default(autoincrement())
+  title        String
+  credits      Int
+  department   Department   @relation(fields: [deptId], references: [id])
+  deptId       Int
+  enrollments  Enrollment[]
+}
+
+// التسجيل والدرجات (علاقة Many-to-Many بين الطالب والمادة)
+model Enrollment {
+  id        Int      @id @default(autoincrement())
+  student   Student  @relation(fields: [studentId], references: [id])
+  studentId Int
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  Int
+  grade     Float?   // الدرجة
+}

@@ -9,5 +9,8 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["./**/*.ts", "./**/*.tsx"]
+  "include": [
+    "src/**/*.ts",
+    "prisma.config.ts"
+    ]
 }

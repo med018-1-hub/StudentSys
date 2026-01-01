@@ -3,6 +3,10 @@ import { config } from "./config/app.config";
 import { loggerMiddleware } from "./middlewares/loggerMiddleware";
 import departmentRoutes from "./routes/departmentRoute";
 import studentRoutes from "./routes/studentRoute";
+import courseRoutes from "./routes/courseRoute";
+import enrollmentRoutes from "./routes/enrollmentRoute";
+
+
 
 
 const app = express();
@@ -14,6 +18,8 @@ app.use(loggerMiddleware);
 // Routes
 app.use("/departments", departmentRoutes);
 app.use("/student", studentRoutes);
+app.use("/course", courseRoutes);
+app.use("/enrollment", enrollmentRoutes);
 
 // Root route
 app.get("/", (req, res) => {
